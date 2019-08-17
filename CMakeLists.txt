@@ -19,7 +19,6 @@ cmake_minimum_required(VERSION 3.12)
 
 project(lightcyber)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CTRL_ALT_TEST_MINIFIER OFF)
 
 # Tell CMake to run qt tools when necessary (For Qt5 GUIs among other things)
 set(CMAKE_AUTOMOC ON)
@@ -31,40 +30,61 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter)
 find_package(OpenGL REQUIRED COMPONENTS OpenGL)
 find_package(Qt5 COMPONENTS Widgets)
 
+set(COMMON_HEADERS config_types.h config.h glext.h)
+set(LOAD_SHADER gfx/load.frag)
+set(SFX_SHADER sfx.frag)
+set(STRINGS_FILE font/strings.txt)
+set(FRAGMENT_SHADER_FILES voronoidesign.frag groundboxes.frag graffiti.frag greet.frag evoke.frag canal.frag text.frag post.frag logo210.frag transbubbles.frag volclouds.frag chart.frag)
+
+set(FRAGMENT_SHADERS "")
+foreach(shader ${FRAGMENT_SHADER_FILES})
+	list(APPEND FRAGMENT_SHADERS "gfx/${shader}")
+endforeach(shader)
+
 
 #################################
 # Demo executable
 #################################
 
-if(MSVC AND ${CTRL_ALT_TEST_MINIFIER})
-    find_program(MINIFIER shader_minifier.exe HINTS ${PROJECT_BINARY_DIR})
-    add_custom_target(minification
-        WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-    )
-else()
-    add_custom_target(minification
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/minification/
-		COMMAND "${Python3_EXECUTABLE}" shader-compressor.py -o "${PROJECT_SOURCE_DIR}/sfx.h" "${PROJECT_SOURCE_DIR}/sfx.frag" --no-minification
-		BYPRODUCTS sfx.h
-        COMMAND "${Python3_EXECUTABLE}" shader-compressor.py -o "${PROJECT_SOURCE_DIR}/gfx/load.h" "${PROJECT_SOURCE_DIR}/gfx/load.frag" --no-minification
-		BYPRODUCTS gfx/load.h
-		)
-endif()
+set(DEMO_HEADERS common.h pal_linux.h pal_win32.h sequence.h gfx/logo210.h gfx/post.h gfx/text.h gfx/ui.h)
 
+set(LOAD_HEADER gfx/load.h)
+set(SFX_HEADER sfx.h)
+add_custom_target(minification
+	WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/minification/
+	COMMAND "${Python3_EXECUTABLE}" shader-compressor.py -o "${PROJECT_SOURCE_DIR}/${SFX_HEADER}" "${PROJECT_SOURCE_DIR}/${SFX_SHADER}" --no-minification
+	SRC shader-compressor.py ${SFX_SHADER}
+	BYPRODUCTS ${SFX_HEADER}
+	COMMAND "${Python3_EXECUTABLE}" shader-compressor.py -o "${PROJECT_SOURCE_DIR}/${LOAD_HEADER}" "${PROJECT_SOURCE_DIR}/${LOAD_SHADER}" --no-minification
+	SRC shader-compressor.py ${LOAD_SHADER}
+	BYPRODUCTS ${LOAD_HEADER}
+)
+
+set(FONT_HEADER font/font.h)
 add_custom_target(texture_packing
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/font/
     COMMAND "${Python3_EXECUTABLE}" pack.py
+	SRC font/pack.py ${STRINGS_FILE}
+	BYPRODUCTS ${FONT_HEADER}
 )
 
-set(FRAGMENT_SHADERS voronoidesign.frag groundboxes.frag graffiti.frag greet.frag evoke.frag canal.frag text.frag post.frag logo210.frag transbubbles.frag volclouds.frag chart.frag)
-
+set(SHADER_HEADER gfx/symbols.h)
 add_custom_target(symbolization
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/gfx/
-	COMMAND "${Python3_EXECUTABLE}" symbolize.py ${FRAGMENT_SHADERS} -o symbols.h
-	BYPRODUCTS gfx/symbols.h
+	COMMAND "${Python3_EXECUTABLE}" symbolize.py ${FRAGMENT_SHADER_FILES} -o symbols.h
+	SRC ${FRAGMENT_SHADERS}
+	BYPRODUCTS ${SHADER_HEADER}
 )
 
-add_executable(lightcyber ls.c )
+add_executable(lightcyber
+	ls.c
+	${COMMON_HEADERS}
+	${DEMO_HEADERS}
+	${LOAD_SHADER}
+	${SFX_SHADER}
+	${STRINGS_FILE}
+	${FRAGMENT_SHADERS}
+)
 add_dependencies(lightcyber minification)
 add_dependencies(lightcyber texture_packing)
 add_dependencies(lightcyber symbolization)
@@ -100,6 +120,13 @@ endif()
 # Studio executable
 #################################
 
-add_executable(studio studio/studio.cpp studio/mainwindow.cpp studio/mainwindow.ui studio/demoapi.cpp studio/renderviewwidget.cpp)
+add_executable(studio
+	studio/studio.cpp
+	studio/mainwindow.cpp
+	studio/mainwindow.ui
+	studio/demoapi.cpp
+	studio/renderviewwidget.cpp
+	${COMMON_HEADERS}
+)
 
 target_link_libraries(studio Qt5::Widgets)
