@@ -60,7 +60,7 @@ void Loadscale()
 {
     int scale_size = strlen(scale_source);
     scale_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(scale_handle, 1, (GLchar **)&scale_source, &scale_size);
+    glShaderSource(scale_handle, 1, (const GLchar **)&scale_source, &scale_size);
     glCompileShader(scale_handle);
 #ifdef DEBUG
     printf("---> scale Shader:\n");
@@ -73,7 +73,7 @@ void Loaddsmoothvoronoi()
 {
     int dsmoothvoronoi_size = strlen(dsmoothvoronoi_source);
     dsmoothvoronoi_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dsmoothvoronoi_handle, 1, (GLchar **)&dsmoothvoronoi_source, &dsmoothvoronoi_size);
+    glShaderSource(dsmoothvoronoi_handle, 1, (const GLchar **)&dsmoothvoronoi_source, &dsmoothvoronoi_size);
     glCompileShader(dsmoothvoronoi_handle);
 #ifdef DEBUG
     printf("---> dsmoothvoronoi Shader:\n");
@@ -86,7 +86,7 @@ void Loadrand()
 {
     int rand_size = strlen(rand_source);
     rand_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(rand_handle, 1, (GLchar **)&rand_source, &rand_size);
+    glShaderSource(rand_handle, 1, (const GLchar **)&rand_source, &rand_size);
     glCompileShader(rand_handle);
 #ifdef DEBUG
     printf("---> rand Shader:\n");
@@ -99,7 +99,7 @@ void Loadhash31()
 {
     int hash31_size = strlen(hash31_source);
     hash31_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(hash31_handle, 1, (GLchar **)&hash31_source, &hash31_size);
+    glShaderSource(hash31_handle, 1, (const GLchar **)&hash31_source, &hash31_size);
     glCompileShader(hash31_handle);
 #ifdef DEBUG
     printf("---> hash31 Shader:\n");
@@ -112,7 +112,7 @@ void Loadlfnoise()
 {
     int lfnoise_size = strlen(lfnoise_source);
     lfnoise_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(lfnoise_handle, 1, (GLchar **)&lfnoise_source, &lfnoise_size);
+    glShaderSource(lfnoise_handle, 1, (const GLchar **)&lfnoise_source, &lfnoise_size);
     glCompileShader(lfnoise_handle);
 #ifdef DEBUG
     printf("---> lfnoise Shader:\n");
@@ -125,7 +125,7 @@ void Loadmfnoise()
 {
     int mfnoise_size = strlen(mfnoise_source);
     mfnoise_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(mfnoise_handle, 1, (GLchar **)&mfnoise_source, &mfnoise_size);
+    glShaderSource(mfnoise_handle, 1, (const GLchar **)&mfnoise_source, &mfnoise_size);
     glCompileShader(mfnoise_handle);
 #ifdef DEBUG
     printf("---> mfnoise Shader:\n");
@@ -138,7 +138,7 @@ void Loaddbox()
 {
     int dbox_size = strlen(dbox_source);
     dbox_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dbox_handle, 1, (GLchar **)&dbox_source, &dbox_size);
+    glShaderSource(dbox_handle, 1, (const GLchar **)&dbox_source, &dbox_size);
     glCompileShader(dbox_handle);
 #ifdef DEBUG
     printf("---> dbox Shader:\n");
@@ -151,7 +151,7 @@ void Loaddlinesegment3()
 {
     int dlinesegment3_size = strlen(dlinesegment3_source);
     dlinesegment3_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dlinesegment3_handle, 1, (GLchar **)&dlinesegment3_source, &dlinesegment3_size);
+    glShaderSource(dlinesegment3_handle, 1, (const GLchar **)&dlinesegment3_source, &dlinesegment3_size);
     glCompileShader(dlinesegment3_handle);
 #ifdef DEBUG
     printf("---> dlinesegment3 Shader:\n");
@@ -164,7 +164,7 @@ void Loadstroke()
 {
     int stroke_size = strlen(stroke_source);
     stroke_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(stroke_handle, 1, (GLchar **)&stroke_source, &stroke_size);
+    glShaderSource(stroke_handle, 1, (const GLchar **)&stroke_source, &stroke_size);
     glCompileShader(stroke_handle);
 #ifdef DEBUG
     printf("---> stroke Shader:\n");
@@ -177,7 +177,7 @@ void Loadzextrude()
 {
     int zextrude_size = strlen(zextrude_source);
     zextrude_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(zextrude_handle, 1, (GLchar **)&zextrude_source, &zextrude_size);
+    glShaderSource(zextrude_handle, 1, (const GLchar **)&zextrude_source, &zextrude_size);
     glCompileShader(zextrude_handle);
 #ifdef DEBUG
     printf("---> zextrude Shader:\n");
@@ -190,7 +190,7 @@ void Loadadd()
 {
     int add_size = strlen(add_source);
     add_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(add_handle, 1, (GLchar **)&add_source, &add_size);
+    glShaderSource(add_handle, 1, (const GLchar **)&add_source, &add_size);
     glCompileShader(add_handle);
 #ifdef DEBUG
     printf("---> add Shader:\n");
@@ -203,7 +203,7 @@ void Loadsmoothmin()
 {
     int smoothmin_size = strlen(smoothmin_source);
     smoothmin_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(smoothmin_handle, 1, (GLchar **)&smoothmin_source, &smoothmin_size);
+    glShaderSource(smoothmin_handle, 1, (const GLchar **)&smoothmin_source, &smoothmin_size);
     glCompileShader(smoothmin_handle);
 #ifdef DEBUG
     printf("---> smoothmin Shader:\n");
@@ -216,7 +216,7 @@ void Loaddspline3()
 {
     int dspline3_size = strlen(dspline3_source);
     dspline3_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dspline3_handle, 1, (GLchar **)&dspline3_source, &dspline3_size);
+    glShaderSource(dspline3_handle, 1, (const GLchar **)&dspline3_source, &dspline3_size);
     glCompileShader(dspline3_handle);
 #ifdef DEBUG
     printf("---> dspline3 Shader:\n");
@@ -229,7 +229,7 @@ void Loaddvoronoi()
 {
     int dvoronoi_size = strlen(dvoronoi_source);
     dvoronoi_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dvoronoi_handle, 1, (GLchar **)&dvoronoi_source, &dvoronoi_size);
+    glShaderSource(dvoronoi_handle, 1, (const GLchar **)&dvoronoi_source, &dvoronoi_size);
     glCompileShader(dvoronoi_handle);
 #ifdef DEBUG
     printf("---> dvoronoi Shader:\n");
@@ -242,7 +242,7 @@ void Loadnormal()
 {
     int normal_size = strlen(normal_source);
     normal_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(normal_handle, 1, (GLchar **)&normal_source, &normal_size);
+    glShaderSource(normal_handle, 1, (const GLchar **)&normal_source, &normal_size);
     glCompileShader(normal_handle);
 #ifdef DEBUG
     printf("---> normal Shader:\n");
@@ -255,7 +255,7 @@ void Loaddbox3()
 {
     int dbox3_size = strlen(dbox3_source);
     dbox3_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dbox3_handle, 1, (GLchar **)&dbox3_source, &dbox3_size);
+    glShaderSource(dbox3_handle, 1, (const GLchar **)&dbox3_source, &dbox3_size);
     glCompileShader(dbox3_handle);
 #ifdef DEBUG
     printf("---> dbox3 Shader:\n");
@@ -268,7 +268,7 @@ void Loadrot3()
 {
     int rot3_size = strlen(rot3_source);
     rot3_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(rot3_handle, 1, (GLchar **)&rot3_source, &rot3_size);
+    glShaderSource(rot3_handle, 1, (const GLchar **)&rot3_source, &rot3_size);
     glCompileShader(rot3_handle);
 #ifdef DEBUG
     printf("---> rot3 Shader:\n");
@@ -281,7 +281,7 @@ void Loaddtriangle()
 {
     int dtriangle_size = strlen(dtriangle_source);
     dtriangle_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dtriangle_handle, 1, (GLchar **)&dtriangle_source, &dtriangle_size);
+    glShaderSource(dtriangle_handle, 1, (const GLchar **)&dtriangle_source, &dtriangle_size);
     glCompileShader(dtriangle_handle);
 #ifdef DEBUG
     printf("---> dtriangle Shader:\n");
@@ -294,7 +294,7 @@ void Loaddlinesegment()
 {
     int dlinesegment_size = strlen(dlinesegment_source);
     dlinesegment_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dlinesegment_handle, 1, (GLchar **)&dlinesegment_source, &dlinesegment_size);
+    glShaderSource(dlinesegment_handle, 1, (const GLchar **)&dlinesegment_source, &dlinesegment_size);
     glCompileShader(dlinesegment_handle);
 #ifdef DEBUG
     printf("---> dlinesegment Shader:\n");
@@ -307,7 +307,7 @@ void Loaddpolygon()
 {
     int dpolygon_size = strlen(dpolygon_source);
     dpolygon_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dpolygon_handle, 1, (GLchar **)&dpolygon_source, &dpolygon_size);
+    glShaderSource(dpolygon_handle, 1, (const GLchar **)&dpolygon_source, &dpolygon_size);
     glCompileShader(dpolygon_handle);
 #ifdef DEBUG
     printf("---> dpolygon Shader:\n");
@@ -320,7 +320,7 @@ void Loadrot()
 {
     int rot_size = strlen(rot_source);
     rot_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(rot_handle, 1, (GLchar **)&rot_source, &rot_size);
+    glShaderSource(rot_handle, 1, (const GLchar **)&rot_source, &rot_size);
     glCompileShader(rot_handle);
 #ifdef DEBUG
     printf("---> rot Shader:\n");
@@ -333,7 +333,7 @@ void Loaddcircle()
 {
     int dcircle_size = strlen(dcircle_source);
     dcircle_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dcircle_handle, 1, (GLchar **)&dcircle_source, &dcircle_size);
+    glShaderSource(dcircle_handle, 1, (const GLchar **)&dcircle_source, &dcircle_size);
     glCompileShader(dcircle_handle);
 #ifdef DEBUG
     printf("---> dcircle Shader:\n");
@@ -346,7 +346,7 @@ void Loaddschnappsgirls()
 {
     int dschnappsgirls_size = strlen(dschnappsgirls_source);
     dschnappsgirls_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dschnappsgirls_handle, 1, (GLchar **)&dschnappsgirls_source, &dschnappsgirls_size);
+    glShaderSource(dschnappsgirls_handle, 1, (const GLchar **)&dschnappsgirls_source, &dschnappsgirls_size);
     glCompileShader(dschnappsgirls_handle);
 #ifdef DEBUG
     printf("---> dschnappsgirls Shader:\n");
@@ -359,7 +359,7 @@ void Loaddspacepigs()
 {
     int dspacepigs_size = strlen(dspacepigs_source);
     dspacepigs_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dspacepigs_handle, 1, (GLchar **)&dspacepigs_source, &dspacepigs_size);
+    glShaderSource(dspacepigs_handle, 1, (const GLchar **)&dspacepigs_source, &dspacepigs_size);
     glCompileShader(dspacepigs_handle);
 #ifdef DEBUG
     printf("---> dspacepigs Shader:\n");
@@ -372,7 +372,7 @@ void Loaddkewlers()
 {
     int dkewlers_size = strlen(dkewlers_source);
     dkewlers_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dkewlers_handle, 1, (GLchar **)&dkewlers_source, &dkewlers_size);
+    glShaderSource(dkewlers_handle, 1, (const GLchar **)&dkewlers_source, &dkewlers_size);
     glCompileShader(dkewlers_handle);
 #ifdef DEBUG
     printf("---> dkewlers Shader:\n");
@@ -385,7 +385,7 @@ void Loaddfarbrausch()
 {
     int dfarbrausch_size = strlen(dfarbrausch_source);
     dfarbrausch_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dfarbrausch_handle, 1, (GLchar **)&dfarbrausch_source, &dfarbrausch_size);
+    glShaderSource(dfarbrausch_handle, 1, (const GLchar **)&dfarbrausch_source, &dfarbrausch_size);
     glCompileShader(dfarbrausch_handle);
 #ifdef DEBUG
     printf("---> dfarbrausch Shader:\n");
@@ -398,7 +398,7 @@ void Loaddhaujobb()
 {
     int dhaujobb_size = strlen(dhaujobb_source);
     dhaujobb_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dhaujobb_handle, 1, (GLchar **)&dhaujobb_source, &dhaujobb_size);
+    glShaderSource(dhaujobb_handle, 1, (const GLchar **)&dhaujobb_source, &dhaujobb_size);
     glCompileShader(dhaujobb_handle);
 #ifdef DEBUG
     printf("---> dhaujobb Shader:\n");
@@ -411,7 +411,7 @@ void Loaddmercury()
 {
     int dmercury_size = strlen(dmercury_source);
     dmercury_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dmercury_handle, 1, (GLchar **)&dmercury_source, &dmercury_size);
+    glShaderSource(dmercury_handle, 1, (const GLchar **)&dmercury_source, &dmercury_size);
     glCompileShader(dmercury_handle);
 #ifdef DEBUG
     printf("---> dmercury Shader:\n");
@@ -424,7 +424,7 @@ void Loadrshort()
 {
     int rshort_size = strlen(rshort_source);
     rshort_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(rshort_handle, 1, (GLchar **)&rshort_source, &rshort_size);
+    glShaderSource(rshort_handle, 1, (const GLchar **)&rshort_source, &rshort_size);
     glCompileShader(rshort_handle);
 #ifdef DEBUG
     printf("---> rshort Shader:\n");
@@ -437,7 +437,7 @@ void Loadrfloat()
 {
     int rfloat_size = strlen(rfloat_source);
     rfloat_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(rfloat_handle, 1, (GLchar **)&rfloat_source, &rfloat_size);
+    glShaderSource(rfloat_handle, 1, (const GLchar **)&rfloat_source, &rfloat_size);
     glCompileShader(rfloat_handle);
 #ifdef DEBUG
     printf("---> rfloat Shader:\n");
@@ -450,7 +450,7 @@ void Loaddrhomboid()
 {
     int drhomboid_size = strlen(drhomboid_source);
     drhomboid_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(drhomboid_handle, 1, (GLchar **)&drhomboid_source, &drhomboid_size);
+    glShaderSource(drhomboid_handle, 1, (const GLchar **)&drhomboid_source, &drhomboid_size);
     glCompileShader(drhomboid_handle);
 #ifdef DEBUG
     printf("---> drhomboid Shader:\n");
@@ -463,7 +463,7 @@ void Loaddcirclesegment()
 {
     int dcirclesegment_size = strlen(dcirclesegment_source);
     dcirclesegment_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dcirclesegment_handle, 1, (GLchar **)&dcirclesegment_source, &dcirclesegment_size);
+    glShaderSource(dcirclesegment_handle, 1, (const GLchar **)&dcirclesegment_source, &dcirclesegment_size);
     glCompileShader(dcirclesegment_handle);
 #ifdef DEBUG
     printf("---> dcirclesegment Shader:\n");
@@ -476,7 +476,7 @@ void Loaddglyph()
 {
     int dglyph_size = strlen(dglyph_source);
     dglyph_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dglyph_handle, 1, (GLchar **)&dglyph_source, &dglyph_size);
+    glShaderSource(dglyph_handle, 1, (const GLchar **)&dglyph_source, &dglyph_size);
     glCompileShader(dglyph_handle);
 #ifdef DEBUG
     printf("---> dglyph Shader:\n");
@@ -489,7 +489,7 @@ void Loaddstring()
 {
     int dstring_size = strlen(dstring_source);
     dstring_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dstring_handle, 1, (GLchar **)&dstring_source, &dstring_size);
+    glShaderSource(dstring_handle, 1, (const GLchar **)&dstring_source, &dstring_size);
     glCompileShader(dstring_handle);
 #ifdef DEBUG
     printf("---> dstring Shader:\n");
@@ -502,7 +502,7 @@ void Loaddfloat()
 {
     int dfloat_size = strlen(dfloat_source);
     dfloat_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dfloat_handle, 1, (GLchar **)&dfloat_source, &dfloat_size);
+    glShaderSource(dfloat_handle, 1, (const GLchar **)&dfloat_source, &dfloat_size);
     glCompileShader(dfloat_handle);
 #ifdef DEBUG
     printf("---> dfloat Shader:\n");
@@ -515,7 +515,7 @@ void Loaddint()
 {
     int dint_size = strlen(dint_source);
     dint_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dint_handle, 1, (GLchar **)&dint_source, &dint_size);
+    glShaderSource(dint_handle, 1, (const GLchar **)&dint_source, &dint_size);
     glCompileShader(dint_handle);
 #ifdef DEBUG
     printf("---> dint Shader:\n");
@@ -528,7 +528,7 @@ void Loaddtime()
 {
     int dtime_size = strlen(dtime_source);
     dtime_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(dtime_handle, 1, (GLchar **)&dtime_source, &dtime_size);
+    glShaderSource(dtime_handle, 1, (const GLchar **)&dtime_source, &dtime_size);
     glCompileShader(dtime_handle);
 #ifdef DEBUG
     printf("---> dtime Shader:\n");
@@ -541,7 +541,7 @@ void Loadwindow()
 {
     int window_size = strlen(window_source);
     window_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(window_handle, 1, (GLchar **)&window_source, &window_size);
+    glShaderSource(window_handle, 1, (const GLchar **)&window_source, &window_size);
     glCompileShader(window_handle);
 #ifdef DEBUG
     printf("---> window Shader:\n");
@@ -554,7 +554,7 @@ void Loadprogressbar()
 {
     int progressbar_size = strlen(progressbar_source);
     progressbar_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(progressbar_handle, 1, (GLchar **)&progressbar_source, &progressbar_size);
+    glShaderSource(progressbar_handle, 1, (const GLchar **)&progressbar_source, &progressbar_size);
     glCompileShader(progressbar_handle);
 #ifdef DEBUG
     printf("---> progressbar Shader:\n");
@@ -567,7 +567,7 @@ void Loadhash13()
 {
     int hash13_size = strlen(hash13_source);
     hash13_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(hash13_handle, 1, (GLchar **)&hash13_source, &hash13_size);
+    glShaderSource(hash13_handle, 1, (const GLchar **)&hash13_source, &hash13_size);
     glCompileShader(hash13_handle);
 #ifdef DEBUG
     printf("---> hash13 Shader:\n");
@@ -679,7 +679,7 @@ void Loadvoronoidesign()
 {
     int voronoidesign_size = strlen(voronoidesign_source);
     voronoidesign_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(voronoidesign_handle, 1, (GLchar **)&voronoidesign_source, &voronoidesign_size);
+    glShaderSource(voronoidesign_handle, 1, (const GLchar **)&voronoidesign_source, &voronoidesign_size);
     glCompileShader(voronoidesign_handle);
 #ifdef DEBUG
     printf("---> voronoidesign Shader:\n");
@@ -719,7 +719,7 @@ void Loadgroundboxes()
 {
     int groundboxes_size = strlen(groundboxes_source);
     groundboxes_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(groundboxes_handle, 1, (GLchar **)&groundboxes_source, &groundboxes_size);
+    glShaderSource(groundboxes_handle, 1, (const GLchar **)&groundboxes_source, &groundboxes_size);
     glCompileShader(groundboxes_handle);
 #ifdef DEBUG
     printf("---> groundboxes Shader:\n");
@@ -758,7 +758,7 @@ void Loadgraffiti()
 {
     int graffiti_size = strlen(graffiti_source);
     graffiti_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(graffiti_handle, 1, (GLchar **)&graffiti_source, &graffiti_size);
+    glShaderSource(graffiti_handle, 1, (const GLchar **)&graffiti_source, &graffiti_size);
     glCompileShader(graffiti_handle);
 #ifdef DEBUG
     printf("---> graffiti Shader:\n");
@@ -796,7 +796,7 @@ void Loadgreet()
 {
     int greet_size = strlen(greet_source);
     greet_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(greet_handle, 1, (GLchar **)&greet_source, &greet_size);
+    glShaderSource(greet_handle, 1, (const GLchar **)&greet_source, &greet_size);
     glCompileShader(greet_handle);
 #ifdef DEBUG
     printf("---> greet Shader:\n");
@@ -844,7 +844,7 @@ void Loadevoke()
 {
     int evoke_size = strlen(evoke_source);
     evoke_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(evoke_handle, 1, (GLchar **)&evoke_source, &evoke_size);
+    glShaderSource(evoke_handle, 1, (const GLchar **)&evoke_source, &evoke_size);
     glCompileShader(evoke_handle);
 #ifdef DEBUG
     printf("---> evoke Shader:\n");
@@ -876,7 +876,7 @@ void Loadcanal()
 {
     int canal_size = strlen(canal_source);
     canal_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(canal_handle, 1, (GLchar **)&canal_source, &canal_size);
+    glShaderSource(canal_handle, 1, (const GLchar **)&canal_source, &canal_size);
     glCompileShader(canal_handle);
 #ifdef DEBUG
     printf("---> canal Shader:\n");
@@ -912,7 +912,7 @@ void Loadtext()
 {
     int text_size = strlen(text_source);
     text_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(text_handle, 1, (GLchar **)&text_source, &text_size);
+    glShaderSource(text_handle, 1, (const GLchar **)&text_source, &text_size);
     glCompileShader(text_handle);
 #ifdef DEBUG
     printf("---> text Shader:\n");
@@ -960,7 +960,7 @@ void Loadpost()
 {
     int post_size = strlen(post_source);
     post_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(post_handle, 1, (GLchar **)&post_source, &post_size);
+    glShaderSource(post_handle, 1, (const GLchar **)&post_source, &post_size);
     glCompileShader(post_handle);
 #ifdef DEBUG
     printf("---> post Shader:\n");
@@ -995,7 +995,7 @@ void Loadlogo210()
 {
     int logo210_size = strlen(logo210_source);
     logo210_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(logo210_handle, 1, (GLchar **)&logo210_source, &logo210_size);
+    glShaderSource(logo210_handle, 1, (const GLchar **)&logo210_source, &logo210_size);
     glCompileShader(logo210_handle);
 #ifdef DEBUG
     printf("---> logo210 Shader:\n");
@@ -1024,7 +1024,7 @@ void Loadtransbubbles()
 {
     int transbubbles_size = strlen(transbubbles_source);
     transbubbles_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(transbubbles_handle, 1, (GLchar **)&transbubbles_source, &transbubbles_size);
+    glShaderSource(transbubbles_handle, 1, (const GLchar **)&transbubbles_source, &transbubbles_size);
     glCompileShader(transbubbles_handle);
 #ifdef DEBUG
     printf("---> transbubbles Shader:\n");
@@ -1059,7 +1059,7 @@ void Loadvolclouds()
 {
     int volclouds_size = strlen(volclouds_source);
     volclouds_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(volclouds_handle, 1, (GLchar **)&volclouds_source, &volclouds_size);
+    glShaderSource(volclouds_handle, 1, (const GLchar **)&volclouds_source, &volclouds_size);
     glCompileShader(volclouds_handle);
 #ifdef DEBUG
     printf("---> volclouds Shader:\n");
@@ -1085,7 +1085,7 @@ void Loadchart()
 {
     int chart_size = strlen(chart_source);
     chart_handle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(chart_handle, 1, (GLchar **)&chart_source, &chart_size);
+    glShaderSource(chart_handle, 1, (const GLchar **)&chart_source, &chart_size);
     glCompileShader(chart_handle);
 #ifdef DEBUG
     printf("---> chart Shader:\n");
