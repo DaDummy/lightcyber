@@ -4,11 +4,11 @@
 #include "config_types.h"
 
 static const struct OpenGLSettings opengl_settings = {
-	CoreProfile, // profile
+    CompatibilityProfile, // profile
 	DoubleBuffer, // swapChain
 
-	3, // majorVersion
-	0, // minorVersion
+    2, // majorVersion
+    1, // minorVersion
 
 	0, // useSRGB
 
