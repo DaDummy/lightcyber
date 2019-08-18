@@ -2,6 +2,8 @@
 
 extern "C" {
 #include "config.h"
+#include "engine/renderer.h"
+#include "engine/loader.h"
 }
 
 
@@ -14,12 +16,15 @@ const OpenGLSettings &DemoApi::getOpenGlSettings()
 
 void DemoApi::initializeGL()
 {
-    // TODO(ca) Implement me
+    rInitializeRenderer();
+    lInitializeLoader();
 }
 
 void DemoApi::resizeView(int w, int h)
 {
-    // TODO(ca) Implement me
+    ::w = w;
+    ::h = h;
+    glViewport(0, 0, w, h);
 }
 
 void DemoApi::setTimeNow(double t)
@@ -30,5 +35,5 @@ void DemoApi::setTimeNow(double t)
 
 void DemoApi::renderFrame()
 {
-    // TODO(ca) Implement me
+    lRenderLoadingScreen();
 }

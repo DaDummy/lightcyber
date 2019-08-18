@@ -30,7 +30,7 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter)
 find_package(OpenGL REQUIRED COMPONENTS OpenGL)
 find_package(Qt5 COMPONENTS Widgets)
 
-set(COMMON_HEADERS config_types.h config.h glext.h)
+set(COMMON_HEADERS config_types.h config.h glext.h engine/platform.h engine/renderer.h engine/shader.h engine/loader.h)
 set(LOAD_SHADER gfx/load.frag)
 set(SFX_SHADER sfx.frag)
 set(STRINGS_FILE font/strings.txt)
@@ -53,18 +53,16 @@ set(SFX_HEADER sfx.h)
 add_custom_target(minification
 	WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/minification/
 	COMMAND "${Python3_EXECUTABLE}" shader-compressor.py -o "${PROJECT_SOURCE_DIR}/${SFX_HEADER}" "${PROJECT_SOURCE_DIR}/${SFX_SHADER}" --no-minification
-	SRC shader-compressor.py ${SFX_SHADER}
-	BYPRODUCTS ${SFX_HEADER}
 	COMMAND "${Python3_EXECUTABLE}" shader-compressor.py -o "${PROJECT_SOURCE_DIR}/${LOAD_HEADER}" "${PROJECT_SOURCE_DIR}/${LOAD_SHADER}" --no-minification
-	SRC shader-compressor.py ${LOAD_SHADER}
-	BYPRODUCTS ${LOAD_HEADER}
+	SOURCES shader-compressor.py ${SFX_SHADER} ${LOAD_SHADER}
+	BYPRODUCTS ${SFX_HEADER} ${LOAD_HEADER}
 )
 
 set(FONT_HEADER font/font.h)
 add_custom_target(texture_packing
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/font/
     COMMAND "${Python3_EXECUTABLE}" pack.py
-	SRC font/pack.py ${STRINGS_FILE}
+	SOURCES font/pack.py ${STRINGS_FILE}
 	BYPRODUCTS ${FONT_HEADER}
 )
 
@@ -72,7 +70,7 @@ set(SHADER_HEADER gfx/symbols.h)
 add_custom_target(symbolization
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/gfx/
 	COMMAND "${Python3_EXECUTABLE}" symbolize.py ${FRAGMENT_SHADER_FILES} -o symbols.h
-	SRC ${FRAGMENT_SHADERS}
+	SOURCES ${FRAGMENT_SHADERS}
 	BYPRODUCTS ${SHADER_HEADER}
 )
 
@@ -115,7 +113,6 @@ else()
 endif()
 
 
-
 #################################
 # Studio executable
 #################################
@@ -130,3 +127,4 @@ add_executable(studio
 )
 
 target_link_libraries(studio Qt5::Widgets)
+target_link_libraries(studio OpenGL::GL)

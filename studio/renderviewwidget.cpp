@@ -1,6 +1,8 @@
 #include "renderviewwidget.h"
 #include "demoapi.h"
 
+#include <QOpenGLContext>
+
 
 RenderViewWidget::RenderViewWidget(QWidget* parent)
     : QOpenGLWidget(parent)
@@ -76,5 +78,4 @@ void RenderViewWidget::setup()
     }
 
     setFormat(surfaceFormat);
-    setUpdateBehavior(QOpenGLWidget::UpdateBehavior::NoPartialUpdate);
 }

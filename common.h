@@ -20,6 +20,9 @@
 #define COMMON_H
 
 #include "config.h"
+#include "engine/renderer.h"
+#include "engine/shader.h"
+#include "engine/loader.h"
 
 // #define DEBUG
 
@@ -41,29 +44,6 @@
 #include <GL/gl.h>
 #include <glext.h>
 
-// OpenGL extensions
-PFNGLGETPROGRAMIVPROC glGetProgramiv;
-PFNGLGETSHADERIVPROC glGetShaderiv;
-PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
-PFNGLGETPROGRAMINFOLOGPROC glGetProgramInfoLog;
-PFNGLCREATESHADERPROC glCreateShader;
-PFNGLCREATEPROGRAMPROC glCreateProgram;
-PFNGLSHADERSOURCEPROC glShaderSource;
-PFNGLCOMPILESHADERPROC glCompileShader;
-PFNGLATTACHSHADERPROC glAttachShader;
-PFNGLLINKPROGRAMPROC glLinkProgram;
-PFNGLUSEPROGRAMPROC glUseProgram;
-PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation;
-PFNGLUNIFORM2FPROC glUniform2f;
-PFNGLUNIFORM1FPROC glUniform1f;
-PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
-PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer;
-PFNGLFRAMEBUFFERTEXTURE2DPROC glFramebufferTexture2D;
-PFNGLNAMEDRENDERBUFFERSTORAGEEXTPROC glNamedRenderbufferStorageEXT;
-PFNGLUNIFORM1IPROC glUniform1i;
-#ifdef WIN32
-PFNGLACTIVETEXTUREPROC glActiveTexture;
-#endif
 
 #ifdef DEBUG
 #include <stdio.h>
@@ -113,8 +93,6 @@ void debugp(int program)
 #define printf(a)
 #endif //DEBUG
 
-int w = 1280, h = 720;
-
 #ifdef MIDI
 HMIDIOUT hMidiOut;
 #endif
@@ -154,13 +132,6 @@ int
     // Sequence
     sequence_texture_handle,
 
-    // Loading bar
-    load_handle,
-    load_program,
-    load_resolution_location,
-    load_time_location,
-    load_progress_location,
-    
     // Antialiasing
     fsaa = 25,
     txaa = 1,
@@ -206,7 +177,6 @@ float texs = 512;
 int block_size = 512 * 512,
 nblocks1;
 unsigned int paused = 0;
-float progress = .0;
 
 double t_paused;
 
@@ -217,8 +187,7 @@ GLenum error;
 float t_load_end = 0.;
 
 void load_demo();
-unsigned long __stdcall LoadMusicThread(void *lpParam);
-unsigned long __stdcall LoadTextThread(void * lpParam);
+void load_font();
 void quad();
 void updateBar();
 void draw();
@@ -234,11 +203,6 @@ void draw();
 #define SFX_VAR_ISEQUENCEWIDTH "iSequenceWidth"
 
 #include "font/font.h"
-
-#include "gfx/load.h"
-#define LOAD_VAR_ITIME "iTime"
-#define LOAD_VAR_IPROGRESS "iProgress"
-#define LOAD_VAR_IRESOLUTION "iResolution"
 
 #include "gfx/symbols.h"
 
