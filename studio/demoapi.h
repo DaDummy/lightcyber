@@ -14,12 +14,20 @@ public:
 	static DemoApi api;
 
 public:
-	const OpenGLSettings& getOpenGlSettings();
+    const OpenGLSettings& getOpenGlSettings() const;
 	void initializeGL();
 	void resizeView(int w, int h);
 
-	void setTimeNow(double t_now);
-	void renderFrame();
+    void setTimeNow(double now);
+    double getTimeNow() const;
+
+    void setTimeStart(double start);
+    double getTimeStart() const;
+
+    void setTimeEnd(double end);
+    double getTimeEnd() const;
+
+    void renderFrame();
 
 private:
 	DemoApi() = default;

@@ -23,6 +23,7 @@
 #include "engine/renderer.h"
 #include "engine/shader.h"
 #include "engine/loader.h"
+#include "engine/orchestrator.h"
 
 // #define DEBUG
 
@@ -142,11 +143,7 @@ int
 double mx, my;
 
 // Demo globals
-#define duration 187.061354
-double t_start = 0.,
-    t_now = 0.,
-    t_end = duration,
-    t
+double t
 #ifdef MIDI
     ,
     time_dial = 0.,

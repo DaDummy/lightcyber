@@ -51,7 +51,7 @@ if rest == []:
 
 # Generate compilation header
 header_source = "//Generated with Symbolize (c) 2019 Alexander Kraus <nr4@z10.info>.\n#ifndef "
-header_source += "SYMBOLIZE_H" + "\n#define " + "SYMBOLIZE_H" + "\n\nextern float progress;" 
+header_source += "SYMBOLIZE_H" + "\n#define " + "SYMBOLIZE_H" + "\n"
 symbol_list = []
 scene_names = []
 scene_sources = []
@@ -66,7 +66,7 @@ for inputfile in rest:
         input_source = f.read()
         f.close()
     #print(input_source)
-    scene_sources += [ Compressor.compress(input_source).replace('\"','\\\"').replace('\n', '\\n\"\n\"').replace('#version 130', '#version 130\\n') + "\\0" ]
+    scene_sources += [ Compressor.compress(input_source).replace('\"','\\\"').replace('\n', '\\n\"\n\"').replace('#version 130', '#version 130\\n') ]
     input_source_lines = input_source.split('\n')
     input_source_lines = [ l + "\n" for l in input_source_lines ]
     #print(input_source_lines)

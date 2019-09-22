@@ -9,8 +9,16 @@ class MainWindow : public QMainWindow
 public:
 	MainWindow();
 
-public slots:
+    void setTimeNow(double timeNow);
+    void setTimeRange(double timeStart, double timeEnd);
 
+protected slots:
+    void onChangeTimeNowSlider(int timeNow);
+    void onChangeTimeNowSpinBox(double timeNow);
+
+private:
+    void setControlsTimeNow(double timeNow);
+    void setControlsTimeRange(double timeStart, double timeEnd);
 
 private:
 	Ui::MainWindow window;

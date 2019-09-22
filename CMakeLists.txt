@@ -30,7 +30,7 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter)
 find_package(OpenGL REQUIRED COMPONENTS OpenGL)
 find_package(Qt5 COMPONENTS Widgets)
 
-set(COMMON_HEADERS config_types.h config.h glext.h engine/platform.h engine/renderer.h engine/shader.h engine/loader.h)
+set(COMMON_HEADERS config_types.h config.h glext.h engine/platform.h engine/renderer.h engine/shader.h engine/loader.h engine/orchestrator.h)
 set(LOAD_SHADER gfx/load.frag)
 set(SFX_SHADER sfx.frag)
 set(STRINGS_FILE font/strings.txt)
@@ -54,7 +54,7 @@ add_custom_target(minification
 	WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/minification/
 	COMMAND "${Python3_EXECUTABLE}" shader-compressor.py -o "${PROJECT_SOURCE_DIR}/${SFX_HEADER}" "${PROJECT_SOURCE_DIR}/${SFX_SHADER}" --no-minification
 	COMMAND "${Python3_EXECUTABLE}" shader-compressor.py -o "${PROJECT_SOURCE_DIR}/${LOAD_HEADER}" "${PROJECT_SOURCE_DIR}/${LOAD_SHADER}" --no-minification
-	SOURCES shader-compressor.py ${SFX_SHADER} ${LOAD_SHADER}
+	SOURCES minification/shader-compressor.py ${SFX_SHADER} ${LOAD_SHADER}
 	BYPRODUCTS ${SFX_HEADER} ${LOAD_HEADER}
 )
 
@@ -70,7 +70,7 @@ set(SHADER_HEADER gfx/symbols.h)
 add_custom_target(symbolization
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/gfx/
 	COMMAND "${Python3_EXECUTABLE}" symbolize.py ${FRAGMENT_SHADER_FILES} -o symbols.h
-	SOURCES ${FRAGMENT_SHADERS}
+	SOURCES gfx/symbolize.py minification/Rule.py minification/Token.py minification/GLSLLexer130.py minification/Compressor.py ${FRAGMENT_SHADERS}
 	BYPRODUCTS ${SHADER_HEADER}
 )
 
