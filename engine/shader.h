@@ -7,50 +7,58 @@
 
 struct Uniform
 {
-    GLint* location;
+    GLint location;
     const char* name;
+};
+
+struct ShaderSymbol
+{
+    GLuint handle;
+    GLuint type;
+    const char* source;
 };
 
 struct ShaderProgram
 {
     GLuint handle;
-
-    // GL_FRAGMENT_SHADER
-    const char* fragment_source;
-    GLuint fragment_handle;
-
+    unsigned char numberOfSymbols;
+    unsigned char numberOfUniforms;
+    unsigned short* symbols;
     struct Uniform* uniforms;
 };
 
 
-static GLuint sCompileShader(const char* source, GLuint type)
+static void sCompileSymbol(struct ShaderSymbol* symbol)
 {
-    GLuint shaderHandle = glCreateShader(type);
-    glShaderSource(shaderHandle, 1, (const GLchar **)&source, NULL);
-    glCompileShader(shaderHandle);
+    if (symbol->handle == 0)
+    {
+        const GLuint shaderHandle = glCreateShader(symbol->type);
+        glShaderSource(shaderHandle, 1, &symbol->source, NULL);
+        glCompileShader(shaderHandle);
 
-    return shaderHandle;
+        symbol->handle = shaderHandle;
+    }
 }
 
-static void sCompileShaderProgram(struct ShaderProgram* shaderProgram)
+static void sCompileShaderProgram(struct ShaderProgram* program, struct ShaderSymbol* shader_symbols)
 {
-    GLuint programHandle = glCreateProgram();
+    const GLuint programHandle = glCreateProgram();
 
-    if (shaderProgram->fragment_source != NULL)
+    for (size_t index = 0; index < program->numberOfSymbols; ++index)
     {
-        shaderProgram->fragment_handle = sCompileShader(shaderProgram->fragment_source, GL_FRAGMENT_SHADER);
-        glAttachShader(programHandle, shaderProgram->fragment_handle);
+        sCompileSymbol(&shader_symbols[program->symbols[index]]);
+        glAttachShader(programHandle, shader_symbols[program->symbols[index]].handle);
     }
 
     glLinkProgram(programHandle);
     glUseProgram(programHandle);
 
-    for (struct Uniform* uniform = shaderProgram->uniforms; uniform->name != NULL; ++uniform)
+    for (size_t index = 0; index < program->numberOfUniforms; ++index)
     {
-        *uniform->location = glGetUniformLocation(programHandle, uniform->name);
+        program->uniforms[index].location = glGetUniformLocation(programHandle, program->uniforms[index].name);
     }
 
-    shaderProgram->handle = programHandle;
+    program->handle = programHandle;
 }
 
 #endif // SHADER_H

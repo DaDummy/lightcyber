@@ -31,7 +31,6 @@ find_package(OpenGL REQUIRED COMPONENTS OpenGL)
 find_package(Qt5 COMPONENTS Widgets)
 
 set(COMMON_HEADERS config_types.h config.h glext.h engine/platform.h engine/renderer.h engine/shader.h engine/loader.h engine/orchestrator.h)
-set(LOAD_SHADER gfx/load.frag)
 set(SFX_SHADER sfx.frag)
 set(STRINGS_FILE font/strings.txt)
 set(FRAGMENT_SHADER_FILES voronoidesign.frag groundboxes.frag graffiti.frag greet.frag evoke.frag canal.frag text.frag post.frag logo210.frag transbubbles.frag volclouds.frag chart.frag)
@@ -48,14 +47,22 @@ endforeach(shader)
 
 set(DEMO_HEADERS common.h pal_linux.h pal_win32.h sequence.h gfx/logo210.h gfx/post.h gfx/text.h gfx/ui.h)
 
-set(LOAD_HEADER gfx/load.h)
 set(SFX_HEADER sfx.h)
 add_custom_target(minification
 	WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/minification/
 	COMMAND "${Python3_EXECUTABLE}" shader-compressor.py -o "${PROJECT_SOURCE_DIR}/${SFX_HEADER}" "${PROJECT_SOURCE_DIR}/${SFX_SHADER}" --no-minification
-	COMMAND "${Python3_EXECUTABLE}" shader-compressor.py -o "${PROJECT_SOURCE_DIR}/${LOAD_HEADER}" "${PROJECT_SOURCE_DIR}/${LOAD_SHADER}" --no-minification
-	SOURCES minification/shader-compressor.py ${SFX_SHADER} ${LOAD_SHADER}
-	BYPRODUCTS ${SFX_HEADER} ${LOAD_HEADER}
+    SOURCES minification/shader-compressor.py ${SFX_SHADER}
+    BYPRODUCTS ${SFX_HEADER}
+)
+
+set(SHADER_HEADER shaders.gen.h)
+set(SHADER_FILES gfx/load.frag)
+set(SHADER_SYMBOLS_PATH gfx/symbols/)
+add_custom_target(minification2
+	WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/
+    COMMAND "${Python3_EXECUTABLE}" minification/symbolize.py ${SHADER_FILES} -s ${SHADER_SYMBOLS_PATH} -o ${SHADER_HEADER}
+    SOURCES minification/symbolize.py minification/Rule.py minification/Token.py minification/GLSLLexer130.py minification/Compressor.py ${SHADER_FILES}
+    BYPRODUCTS ${SHADER_HEADER}
 )
 
 set(FONT_HEADER font/font.h)
@@ -78,13 +85,13 @@ add_executable(lightcyber
 	ls.c
 	${COMMON_HEADERS}
 	${DEMO_HEADERS}
-	${LOAD_SHADER}
 	${SFX_SHADER}
 	${STRINGS_FILE}
 	${FRAGMENT_SHADERS}
-    ${SYMBOLS_HEADER}
+	${SHADER_FILES}
 )
 add_dependencies(lightcyber minification)
+add_dependencies(lightcyber minification2)
 add_dependencies(lightcyber texture_packing)
 add_dependencies(lightcyber symbolization)
 
@@ -126,6 +133,11 @@ add_executable(studio
 	studio/renderviewwidget.cpp
 	${COMMON_HEADERS}
 )
+
+add_dependencies(studio minification)
+add_dependencies(studio minification2)
+add_dependencies(studio texture_packing)
+add_dependencies(studio symbolization)
 
 target_link_libraries(studio Qt5::Widgets)
 target_link_libraries(studio OpenGL::GL)

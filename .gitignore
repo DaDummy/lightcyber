@@ -7,6 +7,9 @@ build
 /CMakeSettings.json
 /CMakeLists.txt.*
 
+# Generated headers
+/shaders.gen.h
+
 # Prerequisites
 *.d
 
