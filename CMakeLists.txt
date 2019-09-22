@@ -66,12 +66,12 @@ add_custom_target(texture_packing
 	BYPRODUCTS ${FONT_HEADER}
 )
 
-set(SHADER_HEADER gfx/symbols.h)
+set(SYMBOLS_HEADER gfx/symbols.h)
 add_custom_target(symbolization
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/gfx/
 	COMMAND "${Python3_EXECUTABLE}" symbolize.py ${FRAGMENT_SHADER_FILES} -o symbols.h
 	SOURCES gfx/symbolize.py minification/Rule.py minification/Token.py minification/GLSLLexer130.py minification/Compressor.py ${FRAGMENT_SHADERS}
-	BYPRODUCTS ${SHADER_HEADER}
+    BYPRODUCTS ${SYMBOLS_HEADER}
 )
 
 add_executable(lightcyber
@@ -82,6 +82,7 @@ add_executable(lightcyber
 	${SFX_SHADER}
 	${STRINGS_FILE}
 	${FRAGMENT_SHADERS}
+    ${SYMBOLS_HEADER}
 )
 add_dependencies(lightcyber minification)
 add_dependencies(lightcyber texture_packing)
