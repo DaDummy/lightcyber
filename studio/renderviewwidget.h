@@ -9,6 +9,7 @@ class RenderViewWidget : public QOpenGLWidget
 public:
 	RenderViewWidget(QWidget* parent = nullptr);
 
+protected:
 	void initializeGL() override;
 	void resizeGL(int w, int h) override;
 	void paintGL() override;
